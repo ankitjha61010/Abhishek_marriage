@@ -340,10 +340,10 @@ export default function App() {
             </div>
           </Reveal>
 
-          <Reveal as="section" className="section">
+          {/* <Reveal as="section" className="section">
             <SectionTitle icon={icons.letter}>Send Your Wishes</SectionTitle>
             <Rsvp />
-          </Reveal>
+          </Reveal> */}
 
           <Reveal as="section" className="section closing">
             <Divider wide />
