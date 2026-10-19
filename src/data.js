@@ -66,4 +66,16 @@ export const wedding = {
     'Benarasi Dhun — Shehnai by Ustad Bismillah Khan (excerpt). Archives of Sangeet Natak Akademi, New Delhi, CC BY-NC 4.0',
 
   hashtag: '#AbhishekWedsSumedha',
+
+  // Sanskrit verses: one on the entry envelope, one under the Ganesha invocation on the front page,
+  // and one in the closing section
+  shlokas: {
+    entry: ['मङ्गलं भगवान् विष्णुः', 'मङ्गलं गरुडध्वजः ।', 'मङ्गलं पुण्डरीकाक्षः', 'मङ्गलायतनो हरिः ॥'],
+    front: ['वक्रतुण्ड महाकाय', 'सूर्यकोटि समप्रभ ।', 'निर्विघ्नं कुरु मे देव', 'सर्वकार्येषु सर्वदा ॥'],
+    closing: {
+      lines: ['समञ्जन्तु विश्वे देवाः', 'समापो हृदयानि नौ ॥'],
+      meaning: 'May all the divine powers unite our hearts as one',
+      source: 'Rig Veda 10.85.47',
+    },
+  },
 }

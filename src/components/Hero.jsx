@@ -42,6 +42,11 @@ export default function Hero({ play }) {
       <div className="hero-content">
         <Ganesha className="hero-ganesha" />
         <p className="invocation">॥ श्री गणेशाय नमः ॥</p>
+        <p className="shloka shloka--front">
+          {wedding.shlokas.front.map((line) => (
+            <span key={line}>{line}</span>
+          ))}
+        </p>
         <p className="hero-kicker">We&rsquo;re getting married</p>
         <Divider />
         <h1 className="script hero-name">{groom.name}</h1>

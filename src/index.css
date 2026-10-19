@@ -275,6 +275,21 @@ textarea {
   color: transparent;
 }
 
+.env-shloka {
+  margin: 2px 0 0;
+  padding-top: 8px;
+  border-top: 1px solid rgba(221, 184, 116, 0.35);
+  font-family: 'Tiro Devanagari Hindi', serif;
+  font-size: clamp(0.72rem, min(3.1vw, 1.9svh), 0.88rem);
+  line-height: 1.55;
+  text-align: center;
+  color: #e6c98c;
+}
+
+.env-shloka span {
+  display: block;
+}
+
 /* centre seal */
 .seal {
   position: relative;
@@ -464,6 +479,7 @@ textarea {
 .hero-content > :nth-child(7) { animation-delay: 2.65s; }
 .hero-content > :nth-child(8) { animation-delay: 2.8s; }
 .hero-content > :nth-child(9) { animation-delay: 2.95s; }
+.hero-content > :nth-child(10) { animation-delay: 3.1s; }
 
 @keyframes rise {
   to {
@@ -484,6 +500,49 @@ textarea {
   height: auto;
   margin-bottom: 6px !important;
   filter: drop-shadow(0 2px 3px rgba(110, 70, 30, 0.35));
+}
+
+.shloka {
+  font-family: 'Tiro Devanagari Hindi', serif;
+  line-height: 1.6;
+  color: var(--gold-deep);
+}
+
+.shloka span {
+  display: block;
+}
+
+.shloka--front {
+  margin-top: 4px !important;
+  font-size: clamp(0.78rem, 3.2vw, 0.95rem);
+  opacity: 0.9;
+}
+
+.shloka--front + .hero-kicker {
+  margin-top: 10px;
+}
+
+.shloka--closing {
+  margin: 18px 0 6px;
+  font-size: clamp(1.1rem, 4.6vw, 1.35rem);
+}
+
+.shloka-meaning {
+  margin: 0 auto;
+  max-width: 280px;
+  font-style: italic;
+  font-size: 0.95rem;
+  color: var(--ink-soft);
+}
+
+.shloka-meaning span {
+  display: block;
+  margin-top: 2px;
+  font-style: normal;
+  font-size: 0.75rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--olive);
 }
 
 .invocation + .hero-kicker {

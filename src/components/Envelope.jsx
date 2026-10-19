@@ -58,6 +58,11 @@ export default function Envelope({ onOpen, onDone }) {
           </div>
           <p className="env-mantra">॥ श्री गणेशाय नमः ॥</p>
           <p className="env-shubh">शुभ विवाह</p>
+          <p className="env-shloka">
+            {wedding.shlokas.entry.map((line) => (
+              <span key={line}>{line}</span>
+            ))}
+          </p>
         </header>
 
         <div className="seal">

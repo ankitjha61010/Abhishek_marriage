@@ -355,6 +355,15 @@ export default function App() {
               {groom.shortName} &amp; {bride.shortName}
             </p>
             <Divider wide />
+            <p className="shloka shloka--closing">
+              {wedding.shlokas.closing.lines.map((line) => (
+                <span key={line}>{line}</span>
+              ))}
+            </p>
+            <p className="shloka-meaning">
+              {wedding.shlokas.closing.meaning}
+              <span>— {wedding.shlokas.closing.source}</span>
+            </p>
             <p className="hashtag">{wedding.hashtag}</p>
           </Reveal>
         </div>
