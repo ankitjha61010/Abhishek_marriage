@@ -65,9 +65,8 @@ export const wedding = {
 
   // Background music (starts when the envelope is opened). Set to '' to disable.
   // To change the song, put a file in public/ and update music + musicCredit.
-  music: '/shehnai.m4a',
-  musicCredit:
-    'Benarasi Dhun — Shehnai by Ustad Bismillah Khan (excerpt). Archives of Sangeet Natak Akademi, New Delhi, CC BY-NC 4.0',
+  music: '/Kudmayi.mp3',
+  musicCredit: 'Kudmayi — Rocky Aur Rani Kii Prem Kahaani',
 
   hashtag: '#AbhishekWedsSumedha',
 

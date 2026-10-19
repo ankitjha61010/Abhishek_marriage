@@ -12,6 +12,6 @@
     Cache-Control = "public, max-age=31536000, immutable"
 
 [[headers]]
-  for = "/shehnai.m4a"
+  for = "/Kudmayi.mp3"
   [headers.values]
     Cache-Control = "public, max-age=604800"
