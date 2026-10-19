@@ -21,6 +21,7 @@ function downloadCalendar() {
   const stamp = new Date().toISOString().replace(/[-:]/g, '').split('.')[0] + 'Z'
   const vevents = wedding.events.map((ev, i) => {
     const day = ev.date.replace(/-/g, '')
+    const place = ev.venue ?? wedding.venue
     const next = toDate(ev.date)
     next.setDate(next.getDate() + 1)
     const end = `${next.getFullYear()}${String(next.getMonth() + 1).padStart(2, '0')}${String(next.getDate()).padStart(2, '0')}`
@@ -33,7 +34,7 @@ function downloadCalendar() {
       `DTSTAMP:${stamp}`,
       when,
       `SUMMARY:${ev.title} · ${wedding.groom.shortName} & ${wedding.bride.shortName}`,
-      `LOCATION:${wedding.venue.name}${wedding.venue.address ? ', ' + wedding.venue.address : ''}`,
+      `LOCATION:${place.name}${place.address ? ', ' + place.address : ''}`,
       'END:VEVENT',
     ].join('\r\n')
   })
@@ -272,6 +273,7 @@ export default function App() {
             <ol className="timeline">
               {events.map((ev) => {
                 const d = toDate(ev.date, ev.time)
+                const place = ev.venue ?? venue
                 return (
                   <li key={ev.title} className="timeline-item">
                     <span className="timeline-dot">{icons[ev.icon]}</span>
@@ -284,8 +286,11 @@ export default function App() {
                       {ev.note} <Heart size={11} className="inline-heart" />
                     </p>
                     <p className="timeline-venue">
-                      {venue.name}
-                      {venue.address && `, ${venue.address}`}
+                      {icons.pin}
+                      <span>
+                        <span className="timeline-venue-name">{place.name}</span>
+                        {place.address && <span className="timeline-venue-address">{place.address}</span>}
+                      </span>
                     </p>
                   </li>
                 )

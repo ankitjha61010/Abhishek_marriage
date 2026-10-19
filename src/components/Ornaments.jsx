@@ -365,6 +365,12 @@ export function Curtain({ progress = 1 }) {
           <stop offset="1" stopColor="#d6a078" />
         </linearGradient>
       </defs>
+      {/* Soft edge shadow painted in the SVG — a CSS drop-shadow filter leaves ghost shadows on iOS Safari */}
+      <g fill="none" stroke="#6e3c1e" transform="translate(3 0)">
+        {[10, 6, 3].map((sw) => (
+          <path key={sw} d={edgeAt(1)} strokeWidth={sw} strokeOpacity=".07" />
+        ))}
+      </g>
       <path d={`${edgeAt(1)}H0V0Z`} fill={`url(#${id}c)`} />
       {Array.from({ length: 9 }, (_, i) => (
         <g key={i} fill="none">
@@ -449,18 +455,24 @@ function Urn({ x }) {
   )
 }
 
-const WATER_JETS = [
-  'M200 112Q186 106 175 143',
-  'M200 112Q214 106 225 143',
-  'M200 112Q192 102 185 143',
-  'M200 112Q208 102 215 143',
-]
-const WATER_FALLS = [
-  'M174 146Q169 160 167 182',
-  'M181 148Q178 163 177 183',
-  'M226 146Q231 160 233 182',
-  'M219 148Q222 163 223 183',
-]
+// Fountain water. The tall centre jet bursts at TOP and falls in arcs, some into the upper bowl and the rest
+// into the big basin; the upper bowl spills over its rim in sheets.
+const TOP = 68
+const arc = (dx, yEnd) => `M200 ${TOP + 2}Q${200 + dx * 0.45} ${TOP - 24} ${200 + dx} ${yEnd}`
+const WATER_ARCS = [
+  [18, 142],
+  [26, 143],
+  [44, 182],
+  [58, 184],
+  [72, 185],
+].flatMap(([dx, y]) => [arc(-dx, y), arc(dx, y)])
+const WATER_FALLS = [172, 176, 180, 184].flatMap((x, i) => {
+  const drop = 5 + i * 1.5
+  return [
+    `M${x} 146Q${x - drop} 160 ${x - drop - 1} 183`,
+    `M${400 - x} 146Q${400 - x + drop} 160 ${400 - x + drop + 1} 183`,
+  ]
+})
 
 export function Garden() {
   const id = useSvgId()
@@ -495,24 +507,44 @@ export function Garden() {
       <path d="M100 196Q100 212 200 214Q300 212 300 196V186H100Z" fill={`url(#${id}s)`} stroke="#d2b498" />
       <ellipse cx="200" cy="186" rx="100" ry="16" fill="#f6ebdf" stroke="#d2b498" />
       <ellipse cx="200" cy="186" rx="90" ry="12" fill={`url(#${id}w)`} />
-      {/* animated water: ripples, jets from the top spout, and sheets spilling from the upper bowl */}
+      {/* animated water: sheets spilling from the upper bowl, ripples, the tall jet, its spray arcs and droplets */}
+      <path d="M171 146Q164 162 162 183H182Q178 162 180 148Z" fill="#e9f3f3" opacity=".45" />
+      <path d="M229 146Q236 162 238 183H218Q222 162 220 148Z" fill="#e9f3f3" opacity=".45" />
       <g fill="none" stroke="#f4fbfb" strokeWidth="1">
         {[0, 1, 2].map((i) => (
           <ellipse key={i} className="water-ripple" cx="200" cy="186" rx="30" ry="4.5" style={{ animationDelay: `${i}s` }} />
         ))}
-        {[167, 233].map((x, i) => (
-          <ellipse key={x} className="water-ripple" cx={x} cy="183" rx="7" ry="1.6" style={{ animationDelay: `${i * 0.7}s` }} />
+        {[-72, -58, -44, -18, 18, 44, 58, 72].map((dx, i) => (
+          <ellipse
+            key={dx}
+            className="water-ripple"
+            cx={200 + dx}
+            cy={Math.abs(dx) < 30 ? 143 : 184}
+            rx={Math.abs(dx) < 30 ? 4 : 7}
+            ry="1.6"
+            style={{ animationDelay: `${(i % 4) * 0.45}s` }}
+          />
         ))}
       </g>
       <g fill="none" strokeLinecap="round">
-        {WATER_JETS.concat(WATER_FALLS, ['M200 127V110']).map((d) => (
+        <path d={`M200 127V${TOP}`} stroke="#a9c6ca" strokeWidth="5" opacity=".45" />
+        <path d={`M200 127V${TOP}`} className="water-flow water-flow--jet" stroke="#ffffff" strokeWidth="2.6" />
+        {WATER_ARCS.concat(WATER_FALLS).map((d) => (
           <g key={d}>
-            <path d={d} stroke="#a9c6ca" strokeWidth="2.6" opacity=".55" />
-            <path d={d} className="water-flow" stroke="#ffffff" strokeWidth="1.5" />
+            <path d={d} stroke="#a9c6ca" strokeWidth="2.2" opacity=".5" />
+            <path d={d} className="water-flow" stroke="#ffffff" strokeWidth="1.3" />
           </g>
         ))}
       </g>
-      <circle cx="200" cy="110" r="2.2" fill="#ffffff" className="water-crest" />
+      <g fill="#ffffff">
+        {WATER_ARCS.map((d, i) => (
+          <circle key={d} r={i % 3 ? 1.1 : 1.5} opacity=".9">
+            <animateMotion dur={`${1.3 + (i % 4) * 0.15}s`} begin={`${(i * 0.23) % 1.3}s`} repeatCount="indefinite" path={d} />
+          </circle>
+        ))}
+      </g>
+      <ellipse cx="200" cy={TOP - 2} rx="14" ry="7" fill="#ffffff" className="water-mist" />
+      <circle cx="200" cy={TOP} r="3" fill="#ffffff" className="water-crest" />
       <Bush x={120} y={206} s={0.9} />
       <Bush x={280} y={206} s={0.9} />
     </svg>

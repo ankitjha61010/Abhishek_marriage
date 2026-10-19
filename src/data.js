@@ -30,19 +30,22 @@ export const wedding = {
   },
 
   // Events in order. `date` is ISO (YYYY-MM-DD); add `time: '10:30'` (24h) when known.
+  // Add `venue: { name, address }` to an event held somewhere other than the main venue.
   // The event marked `main` is used for the countdown and the scratch-to-reveal date.
   events: [
     {
-      title: 'Sagun',
+      title: 'Shagun',
       date: '2026-11-26',
       icon: 'kalash',
       note: 'The auspicious beginning of our celebrations',
+      venue: { name: 'Our Sweet Home', address: 'Kharsand, Hayaghat, Samastipur' },
     },
     {
       title: 'Haldi & Mehndi',
       date: '2026-11-26',
       icon: 'mehndi',
       note: 'Turmeric, henna, music & a lot of love',
+      venue: { name: 'Our Sweet Home', address: 'Kharsand, Hayaghat, Samastipur' },
     },
     {
       title: 'Wedding',
