@@ -15,7 +15,7 @@ const toDate = (iso, time = '00:00') => {
 const fmtLong = (date) =>
   date.toLocaleDateString('en-IN', { day: 'numeric', month: 'long', year: 'numeric' })
 const fmtDay = (date) => date.toLocaleDateString('en-IN', { weekday: 'long' })
-const fmtTime = (date) => date.toLocaleTimeString('en-IN', { hour: 'numeric', minute: '2-digit' })
+const fmtTime = (date) => date.toLocaleTimeString('en-IN', { hour: 'numeric', minute: '2-digit' }).toUpperCase()
 
 function downloadCalendar() {
   const stamp = new Date().toISOString().replace(/[-:]/g, '').split('.')[0] + 'Z'
@@ -26,7 +26,7 @@ function downloadCalendar() {
     next.setDate(next.getDate() + 1)
     const end = `${next.getFullYear()}${String(next.getMonth() + 1).padStart(2, '0')}${String(next.getDate()).padStart(2, '0')}`
     const when = ev.time
-      ? `DTSTART:${day}T${ev.time.replace(':', '')}00`
+      ? `DTSTART:${day}T${ev.time.replace(':', '')}00` + (ev.endTime ? `\r\nDTEND:${day}T${ev.endTime.replace(':', '')}00` : '')
       : `DTSTART;VALUE=DATE:${day}\r\nDTEND;VALUE=DATE:${end}`
     return [
       'BEGIN:VEVENT',
@@ -197,7 +197,7 @@ export default function App() {
     if (!audio) return
     // fade in gently instead of starting at full volume
     audio.volume = 0
-    audio.play().catch(() => {})
+    audio.play().catch(() => { })
     const fade = setInterval(() => {
       audio.volume = Math.min(0.6, audio.volume + 0.03)
       if (audio.volume >= 0.6) clearInterval(fade)
@@ -281,6 +281,7 @@ export default function App() {
                     <p className="timeline-date">
                       {fmtDay(d)}, {fmtLong(d)}
                       {ev.time && ` · ${fmtTime(d)}`}
+                      {ev.endTime && ` – ${fmtTime(toDate(ev.date, ev.endTime))}`}
                     </p>
                     <p className="timeline-note">
                       {ev.note} <Heart size={11} className="inline-heart" />
@@ -362,7 +363,6 @@ export default function App() {
             </p>
             <p className="shloka-meaning">
               {wedding.shlokas.closing.meaning}
-              <span>— {wedding.shlokas.closing.source}</span>
             </p>
             <p className="hashtag">{wedding.hashtag}</p>
           </Reveal>

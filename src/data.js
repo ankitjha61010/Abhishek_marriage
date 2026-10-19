@@ -8,7 +8,7 @@ export const wedding = {
     mother: 'Madhu Devi',
   },
   bride: {
-    name: 'Sumedha',
+    name: 'Sumedha Kumari',
     shortName: 'Sumedha',
     father: 'Vinod Kumar',
     mother: 'Neera Kumari',
@@ -29,13 +29,14 @@ export const wedding = {
     coords: null,
   },
 
-  // Events in order. `date` is ISO (YYYY-MM-DD); add `time: '10:30'` (24h) when known.
+  // Events in order. `date` is ISO (YYYY-MM-DD); add `time: '10:30'` (24h) when known, and `endTime` for a range.
   // Add `venue: { name, address }` to an event held somewhere other than the main venue.
   // The event marked `main` is used for the countdown and the scratch-to-reveal date.
   events: [
     {
       title: 'Shagun',
       date: '2026-11-26',
+      time: '13:00',
       icon: 'kalash',
       note: 'The auspicious beginning of our celebrations',
       venue: { name: 'Our Sweet Home', address: 'Kharsand, Hayaghat, Samastipur' },
@@ -43,6 +44,8 @@ export const wedding = {
     {
       title: 'Haldi & Mehndi',
       date: '2026-11-26',
+      time: '17:00',
+      endTime: '22:00',
       icon: 'mehndi',
       note: 'Turmeric, henna, music & a lot of love',
       venue: { name: 'Our Sweet Home', address: 'Kharsand, Hayaghat, Samastipur' },
@@ -50,6 +53,7 @@ export const wedding = {
     {
       title: 'Wedding',
       date: '2026-11-30',
+      time: '20:00',
       icon: 'rings',
       note: 'Two hearts, one journey — the sacred vows',
       main: true,

@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import { wedding } from '../data'
+import { playOpenSound } from '../openSound'
 import { CornerFlourish, EmbossedLeaves, Ganesha, Seal } from './Ornaments'
 
 const SPARKLES = [
@@ -18,6 +19,7 @@ export default function Envelope({ onOpen, onDone }) {
   const open = () => {
     if (opening) return
     setOpening(true)
+    playOpenSound()
     onOpen()
     setTimeout(onDone, 1900)
   }
@@ -54,6 +56,11 @@ export default function Envelope({ onOpen, onDone }) {
 
         <header className="env-top">
           <div className="ganesha-medallion">
+            <span className="ganesha-orbit" aria-hidden="true" />
+            <span className="ganesha-aura" aria-hidden="true">
+              <span className="ganesha-rays" />
+              <span className="ganesha-shine" />
+            </span>
             <Ganesha className="ganesha" />
           </div>
           <p className="env-mantra">॥ श्री गणेशाय नमः ॥</p>

@@ -51,18 +51,14 @@ export default function Hero({ play }) {
         <Divider />
         <h1 className="script hero-name">{groom.name}</h1>
         <p className="hero-parents">
-          Son of
-          <br />
-          Mr. {groom.father}
+          Son of Mr. {groom.father}
           <br />
           &amp; Mrs. {groom.mother}
         </p>
         <p className="script hero-amp">&amp;</p>
         <h1 className="script hero-name">{bride.name}</h1>
         <p className="hero-parents">
-          Daughter of
-          <br />
-          Mr. {bride.father}
+          Daughter of Mr. {bride.father}
           <br />
           &amp; Mrs. {bride.mother}
         </p>
